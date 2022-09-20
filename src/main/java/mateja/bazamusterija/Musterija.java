@@ -10,6 +10,14 @@ public class Musterija {
     public Musterija() {
     }
 
+    public Musterija(String ime, String brojTelefona, String opisKvara, String adresa, long cena) {
+        this.ime = ime;
+        this.brojTelefona = brojTelefona;
+        this.opisKvara = opisKvara;
+        this.adresa = adresa;
+        this.cena = cena;
+    }
+
     public String getIme() {
         return ime;
     }
