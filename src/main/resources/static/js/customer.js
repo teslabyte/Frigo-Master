@@ -27,7 +27,7 @@ class CustomerInfoBox extends HTMLElement{
         return ['ime','brojtelefona','opiskvara','adresa','cena'];
     }
 
-    attributeChangedCallback(nekitekst){
+    attributeChangedCallback(ime, brojtelefona, opiskvara, adresa, cena){
         this.render();
     }
 }

@@ -1,28 +1,73 @@
 //console.log(musterije)
-var testing = document.getElementById("losd");
 
-musterije.forEach((item)=>{
-    var div = document.createElement("div");
-    var cust = document.createElement("cib-element");
-    div.classList.add("cust-box-div");
-    cust.classList.add("cust-box");
-    cust.setAttribute('ime', item.ime);
-    cust.setAttribute('brojtelefona', item.brojTelefona);
-    cust.setAttribute('opiskvara', item.opisKvara);
-    cust.setAttribute('adresa', item.adresa);
-    cust.setAttribute('cena', item.cena);
-    div.appendChild(cust);
-    testing.appendChild(div);
-})
+var musterijeTemp = musterije;
+var musterijeCompleted = null;
+var musterijeIncomplete = null;
+var musterijeCancelled = null;
 
+drawCustomerBoxes();
 
-//let lista = document.getElementById("testLista");
-//musterije.forEach((item)=>{
-    //let m = document.createElement("li");
-   // m.innerText = musterijaToString(item)
-   // lista.appendChild(m);
-//})
+function filterCompleted(){
+    if(musterijeCompleted === null) {
+        $.get("completed", function (data, status) {
+            musterijeCompleted = data;
+            musterijeTemp = musterijeCompleted;
+            drawCustomerBoxes();
+        });
+    }
+    else {
+        musterijeTemp = musterijeCompleted;
+        drawCustomerBoxes();
+    }
+}
 
-//function musterijaToString(m){
-  //  return m.ime + "," + m.brojTelefona;
-//}
+function filterIncomplete(){
+    if(musterijeIncomplete === null) {
+        $.get("incomplete", function (data, status) {
+            musterijeIncomplete = data;
+            musterijeTemp = musterijeIncomplete;
+            drawCustomerBoxes();
+        });
+    }
+    else{
+        musterijeTemp = musterijeIncomplete;
+        drawCustomerBoxes();
+    }
+}
+
+function filterCancelled(){
+    if(musterijeCancelled === null) {
+        $.get("cancelled", function (data, status) {
+            musterijeCancelled = data;
+            musterijeTemp = musterijeCancelled;
+            drawCustomerBoxes();
+        });
+    }
+    else{
+        musterijeTemp = musterijeCancelled;
+        drawCustomerBoxes();
+    }
+}
+
+function filterNoFilter(){
+    musterijeTemp = musterije;
+    drawCustomerBoxes();
+}
+
+function drawCustomerBoxes(){
+    let testing = document.getElementById("losd");
+    testing.innerHTML = "";
+    musterijeTemp.forEach((item)=>{
+        let div = document.createElement("div");
+        let cust = document.createElement("cib-element");
+        div.classList.add("cust-box-div");
+        cust.classList.add("cust-box");
+        cust.setAttribute('ime', item.musterija.ime);
+        cust.setAttribute('brojtelefona', item.musterija.brojTelefona);
+        cust.setAttribute('opiskvara', item.musterija.opisKvara);
+        cust.setAttribute('adresa', item.musterija.adresa);
+        cust.setAttribute('cena', item.musterija.cena);
+        div.appendChild(cust);
+        testing.appendChild(div);
+    })
+}

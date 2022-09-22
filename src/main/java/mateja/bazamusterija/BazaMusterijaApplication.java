@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BazaMusterijaApplication {
 
 	public static void main(String[] args) {
+		Customers.LoadCustomerInformation();
 		SpringApplication.run(BazaMusterijaApplication.class, args);
 	}
 
