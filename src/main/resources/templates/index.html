@@ -6,6 +6,7 @@
 	<title> Naslovna Strana </title>
 	<link rel="icon" type="image/x-icon" th:href="@{/favicon/favicon.ico}">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" th:src = "@{/js/customer.js}"></script>
 </head>
 
 <body>
@@ -34,7 +35,12 @@
 	<script th:inline="javascript">
 		var musterije = [[${musterije}]];
 	</script>
-    <script type="text/javascript" th:src = "@{/js/index.js}"></script>
+
+	<div class = "list-of-customers-div" id="losd">
+
+	</div>
+
+	<script type="text/javascript" th:src = "@{/js/index.js}"></script>
 
 </body>
 </html>
