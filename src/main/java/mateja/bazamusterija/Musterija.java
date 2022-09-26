@@ -2,9 +2,9 @@ package mateja.bazamusterija;
 
 public class Musterija {
     private String ime;
+    private String adresa;
     private String brojTelefona;
     private String opisKvara;
-    private String adresa;
     private long cena;
 
     public Musterija() {

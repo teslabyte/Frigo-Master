@@ -1,7 +1,8 @@
 package mateja.bazamusterija;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -11,9 +12,13 @@ import java.util.List;
 public class HomeFilterController {
 
     /*
-        Try with GetMapping  /filter= {completed,incomplete,canclled}
+        Try with GetMapping  /filter= {completed,incomplete,cancelled}
      */
 
+    @PostMapping(value = "/customer/new", consumes = "application/json")
+    public void testPost(@RequestBody Musterija requestBody){
+        System.out.println(requestBody.getIme());
+    }
     List<MusterijaWrapper> musterijaWrappers;
 
     @GetMapping(value = "/completed", produces = "application/json")

@@ -4,8 +4,53 @@ var musterijeTemp = musterije;
 var musterijeCompleted = null;
 var musterijeIncomplete = null;
 var musterijeCancelled = null;
+var modal = document.getElementById("enterInfoModal");
 
 drawCustomerBoxes();
+
+function openCustomerModal(){
+    modal.style.display = "block";
+}
+
+function cancelModal(){
+    modal.style.display = "none";
+}
+
+function saveCustomerInfo(){
+    //reset musterije
+    musterijeCompleted = null;
+    musterijeIncomplete = null;
+    musterijeCancelled = null;
+
+    //get text from input boxes
+    let ime = document.getElementById("unesiIme").value;
+    let adresa = document.getElementById("unesiAdresu").value;
+    let brojTelefona = document.getElementById("unesiBrojTelefona").value;
+    let opisKvara = document.getElementById("unesiOpisKvara").value;
+    let cena = document.getElementById("unesiCenu").value;
+
+    //create customerInfo from data
+    let customerInfo = new CustomerInfo(ime,adresa, brojTelefona, opisKvara, cena);
+
+    //send customerInfo to backend
+     /*$.post("customer/new", customerInfo,  function (data, status){
+         console.log(data);
+     })*/
+
+    $.ajax({
+        url: "customer/new",
+        type: "POST",
+        data: JSON.stringify(customerInfo),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response){
+            console.log(response);
+        }
+    })
+
+    console.log(customerInfo);
+
+}
 
 function filterCompleted(){
     if(musterijeCompleted === null) {

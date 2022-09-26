@@ -4,11 +4,11 @@ class CustomerInfoBox extends HTMLElement{
     }
 
     render(){
-        var ime = this.getAttribute('ime') || undefined;
-        var brojTelefona = this.getAttribute('brojtelefona') || undefined;
-        var opisKvara = this.getAttribute('opiskvara') || undefined;
-        var adresa = this.getAttribute('adresa') || undefined;
-        var cena = this.getAttribute('cena') || undefined;
+        let ime = this.getAttribute('ime') || undefined;
+        let brojTelefona = this.getAttribute('brojtelefona') || undefined;
+        let opisKvara = this.getAttribute('opiskvara') || undefined;
+        let adresa = this.getAttribute('adresa') || undefined;
+        let cena = this.getAttribute('cena') || undefined;
         this.innerHTML = 'Ime: ' + ime + '<br/>' +
             'Opis kvara: ' + opisKvara + '<br/>' +
             'Adresa: ' + adresa + '<br/>' +
@@ -33,3 +33,13 @@ class CustomerInfoBox extends HTMLElement{
 }
 
 customElements.define('cib-element', CustomerInfoBox);
+
+class CustomerInfo{
+    constructor(ime, adresa, brojTelefona, opisKvara, cena) {
+        this.ime = ime;
+        this.adresa = adresa;
+        this.brojTelefona = brojTelefona;
+        this.opisKvara = opisKvara;
+        this.cena = cena;
+    }
+}
