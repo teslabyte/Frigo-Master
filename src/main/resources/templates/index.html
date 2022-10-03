@@ -5,7 +5,7 @@
 	<link rel = "stylesheet" th:href = "@{/css/style.css}">
 	<title> Naslovna Strana </title>
 	<link rel="icon" type="image/x-icon" th:href="@{/favicon/favicon.ico}">
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" th:src = "@{/js/customer.js}"></script>
 </head>
 
@@ -26,14 +26,14 @@
 	</div>
 	
 	<div class = "filter-div">
-		<button class = "active-filter-button" th:onclick="filterNoFilter()"> Svi </button>
+		<button class = "active-filter-button" th:onclick="filterAll()"> Svi </button>
 		<button class = "filter-button" th:onclick="filterCompleted()"> Zavrseni </button>
 		<button class = "filter-button" th:onclick="filterIncomplete()"> Nezavrseni </button>
 		<button class = "filter-button" th:onclick="filterCancelled()"> Otkazani </button>
 	</div>
 
 	<script th:inline="javascript">
-		var musterije = [[${musterije}]];
+		let musterije = [[${musterije}]];
 	</script>
 
 	<div class = "list-of-customers-div" id="losd">

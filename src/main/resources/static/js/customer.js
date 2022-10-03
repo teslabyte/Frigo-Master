@@ -27,9 +27,11 @@ class CustomerInfoBox extends HTMLElement{
         return ['ime','brojtelefona','opiskvara','adresa','cena'];
     }
 
+    /*
     attributeChangedCallback(ime, brojtelefona, opiskvara, adresa, cena){
         this.render();
     }
+    */
 }
 
 customElements.define('cib-element', CustomerInfoBox);

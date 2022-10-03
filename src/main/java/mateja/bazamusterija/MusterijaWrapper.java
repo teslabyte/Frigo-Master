@@ -1,11 +1,18 @@
 package mateja.bazamusterija;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("Musterije")
 public class MusterijaWrapper {
-    public static enum Status{
+    public enum Status{
         INCOMPLETE,
         COMPLETED,
         CANCELED
     }
+
+    @Id
+    private String id;
 
     private Musterija musterija;
     private long yId;
@@ -15,11 +22,12 @@ public class MusterijaWrapper {
     public MusterijaWrapper() {
     }
 
-    public MusterijaWrapper(Musterija musterija, long yId, String date, Status status) {
+    public MusterijaWrapper(Musterija musterija, long yId, String date, Status status, String id) {
         this.musterija = musterija;
         this.yId = yId;
         this.date = date;
         this.status = status;
+        this.id = id;
     }
 
     public Musterija getMusterija() {

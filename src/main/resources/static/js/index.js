@@ -33,9 +33,6 @@ function saveCustomerInfo(){
     let customerInfo = new CustomerInfo(ime,adresa, brojTelefona, opisKvara, cena);
 
     //send customerInfo to backend
-     /*$.post("customer/new", customerInfo,  function (data, status){
-         console.log(data);
-     })*/
 
     $.ajax({
         url: "customer/new",
@@ -82,7 +79,7 @@ function filterIncomplete(){
 
 function filterCancelled(){
     if(musterijeCancelled === null) {
-        $.get("cancelled", function (data, status) {
+        $.get("canceled", function (data, status) {
             musterijeCancelled = data;
             musterijeTemp = musterijeCancelled;
             drawCustomerBoxes();
@@ -94,7 +91,7 @@ function filterCancelled(){
     }
 }
 
-function filterNoFilter(){
+function filterAll(){
     musterijeTemp = musterije;
     drawCustomerBoxes();
 }

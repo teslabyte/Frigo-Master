@@ -2,13 +2,15 @@ package mateja.bazamusterija;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "mateja.bazamusterija")
+@EnableMongoRepositories
 public class BazaMusterijaApplication {
 
 	public static void main(String[] args) {
-		Customers.LoadCustomerInformation();
+
 		SpringApplication.run(BazaMusterijaApplication.class, args);
 	}
 
