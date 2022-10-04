@@ -9,4 +9,6 @@ public interface MusterijaDAL {
     List<MusterijaWrapper> getAllCompleted();
     List<MusterijaWrapper> getAllIncomplete();
     List<MusterijaWrapper> getAllCanceled();
+    void addNewMusterija(MusterijaWrapper musterijaWrapper);
+    long getNewestMusterijaId();
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 // Controller used for Filtering and creating and adding new customers
@@ -29,7 +31,12 @@ public class HomeFilterController {
 
     @PostMapping(value = "/customer/new", consumes = "application/json")
     public void testPost(@RequestBody Musterija requestBody){
-        System.out.println(requestBody.getIme());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
+        long id = musterijaDAL.getNewestMusterijaId() + 1;
+        MusterijaWrapper musterijaWrapper = new MusterijaWrapper(requestBody, id, date, MusterijaWrapper.Status.INCOMPLETE, id);
+        musterijaDAL.addNewMusterija(musterijaWrapper);
     }
     List<MusterijaWrapper> musterijaWrappers;
 

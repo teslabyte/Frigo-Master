@@ -12,7 +12,7 @@ public class MusterijaWrapper {
     }
 
     @Id
-    private String id;
+    private long id;
 
     private Musterija musterija;
     private long yId;
@@ -22,7 +22,7 @@ public class MusterijaWrapper {
     public MusterijaWrapper() {
     }
 
-    public MusterijaWrapper(Musterija musterija, long yId, String date, Status status, String id) {
+    public MusterijaWrapper(Musterija musterija, long yId, String date, Status status, long id) {
         this.musterija = musterija;
         this.yId = yId;
         this.date = date;
@@ -60,5 +60,9 @@ public class MusterijaWrapper {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public long getId() {
+        return id;
     }
 }
