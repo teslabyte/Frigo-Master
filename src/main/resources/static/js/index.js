@@ -142,6 +142,22 @@ function saveEditedInfo(){
 function cancelEditModal(){
     editModal.style.display = "none";
 }
+
+function deleteCustomerInfo(){
+    $.ajax({
+        url: "customer/delete",
+        type: "POST",
+        data: JSON.stringify(tempCustomerWrapper),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response){
+            musterijeTemp = response;
+            drawCustomerBoxes();
+        }
+    })
+    editModal.style.display = "none";
+}
+
 function drawCustomerBoxes(){
     let testing = document.getElementById("losd");
     testing.innerHTML = "";

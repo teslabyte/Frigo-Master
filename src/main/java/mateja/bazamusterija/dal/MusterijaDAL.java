@@ -12,4 +12,5 @@ public interface MusterijaDAL {
     void addNewMusterija(MusterijaWrapper musterijaWrapper);
     long getNewestMusterijaId();
     List<MusterijaWrapper> editMusterija(MusterijaWrapper musterijaWrapper);
+    List<MusterijaWrapper> deleteMusterija(MusterijaWrapper musterijaWrapper);
 }

@@ -28,6 +28,11 @@ public class HomeFilterController {
         return musterijaDAL.editMusterija(requestBody);
     }
 
+    @PostMapping(value = "/customer/delete", consumes = "application/json")
+    public List<MusterijaWrapper> deleteCustomer(@RequestBody MusterijaWrapper requestBody){
+        return musterijaDAL.deleteMusterija(requestBody);
+    }
+
     @PostMapping(value = "/customer/new", consumes = "application/json")
     public MusterijaWrapper newCustomer(@RequestBody Musterija requestBody){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
