@@ -56,4 +56,9 @@ public class MusterijaDALImpl implements MusterijaDAL {
         return msw.getId();
     }
 
+    @Override
+    public List<MusterijaWrapper> editMusterija(MusterijaWrapper musterijaWrapper){
+        mongoTemplate.save(musterijaWrapper);
+        return mongoTemplate.findAll(MusterijaWrapper.class);
+    }
 }

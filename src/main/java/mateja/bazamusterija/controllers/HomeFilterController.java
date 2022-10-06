@@ -23,22 +23,28 @@ public class HomeFilterController {
 
     private final MusterijaDAL musterijaDAL;
 
-    /*
-        Try with GetMapping  /filter= {completed,incomplete,cancelled}
-
-        Pokusaj da tri glavna filtera obuhvatis jednim url-om ^
-     */
+    @PostMapping(value = "/customer/edit", consumes = "application/json")
+    public List<MusterijaWrapper> editCustomer(@RequestBody MusterijaWrapper requestBody){
+        return musterijaDAL.editMusterija(requestBody);
+    }
 
     @PostMapping(value = "/customer/new", consumes = "application/json")
-    public void testPost(@RequestBody Musterija requestBody){
+    public MusterijaWrapper newCustomer(@RequestBody Musterija requestBody){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
         long id = musterijaDAL.getNewestMusterijaId() + 1;
         MusterijaWrapper musterijaWrapper = new MusterijaWrapper(requestBody, id, date, MusterijaWrapper.Status.INCOMPLETE, id);
         musterijaDAL.addNewMusterija(musterijaWrapper);
+        return musterijaWrapper;
     }
     List<MusterijaWrapper> musterijaWrappers;
+
+       /*
+        Try with GetMapping  /filter= {completed,incomplete,cancelled}
+
+        Pokusaj da tri glavna filtera obuhvatis jednim url-om ^
+     */
 
     // Filters customer data and returns it
 

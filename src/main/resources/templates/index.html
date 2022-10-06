@@ -51,9 +51,28 @@
 				<input type = "text" id = "unesiBrojTelefona" placeholder="Broj telefona">
 				<input type = "text" id = "unesiOpisKvara" placeholder="Kvar">
 				<input type = "text" id = "unesiCenu" placeholder="Cena">
+
 				<button th:onclick="saveCustomerInfo()">Sacuvaj</button>
 				<button th:onclick="cancelModal()">Otkazi</button>
 			</div>
+		</div>
+	</div>
+
+	<div id="editInfoModal" class="customer-edit-modal-div">
+		<div class="edit-modal-content">
+			<p>Izmeni podatke</p>
+			<input type = "text" id = "izmeniIme">
+			<input type = "text" id = "izmeniAdresu">
+			<input type = "text" id = "izmeniBrojTelefona">
+			<input type = "text" id = "izmeniOpisKvara">
+			<input type = "text" id = "izmeniCenu">
+			<select id="izmeniStatus">
+				<option value = "incomplete">Nezavrseno</option>
+				<option value= "completed">Zavrseno</option>
+				<option value = "canceled">Otkazano</option>
+			</select>
+			<button th:onclick="saveEditedInfo()">Sacuvaj</button>
+			<button th:onclick="cancelEditModal()">Otkazi</button>
 		</div>
 	</div>
 

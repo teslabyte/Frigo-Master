@@ -5,6 +5,8 @@ var musterijeCompleted = null;
 var musterijeIncomplete = null;
 var musterijeCancelled = null;
 var modal = document.getElementById("enterInfoModal");
+var editModal = document.getElementById("editInfoModal");
+var tempCustomerWrapper;
 
 drawCustomerBoxes();
 
@@ -30,8 +32,7 @@ function saveCustomerInfo(){
     let cena = document.getElementById("unesiCenu").value;
 
     //create customerInfo from data
-    let customerInfo = new CustomerInfo(ime,adresa, brojTelefona, opisKvara, cena);
-
+    let customerInfo = new Musterija(ime,adresa, brojTelefona, opisKvara, cena);
     //send customerInfo to backend
 
     $.ajax({
@@ -41,12 +42,12 @@ function saveCustomerInfo(){
         contentType: "application/json",
         dataType: "json",
         success: function (response){
-            console.log(response);
+            musterijeTemp.push(response);
+            drawCustomerBoxes();
         }
     })
 
-    console.log(customerInfo);
-
+    modal.style.display = "none";
 }
 
 function filterCompleted(){
@@ -96,6 +97,51 @@ function filterAll(){
     drawCustomerBoxes();
 }
 
+function editCustomerInfo(customerInfoWrapper){
+    $('#izmeniIme').val(customerInfoWrapper.musterija.ime);
+    $('#izmeniBrojTelefona').val(customerInfoWrapper.musterija.brojTelefona);
+    $('#izmeniOpisKvara').val(customerInfoWrapper.musterija.opisKvara);
+    $('#izmeniAdresu').val(customerInfoWrapper.musterija.adresa);
+    $('#izmeniCenu').val(customerInfoWrapper.musterija.cena);
+
+    if(customerInfoWrapper.status === "COMPLETED") $('#izmeniStatus').val("completed");
+    else if (customerInfoWrapper.status === "CANCELED") $('#izmeniStatus').val("canceled");
+    else $('#izmeniStatus').val("incomplete");
+    tempCustomerWrapper = customerInfoWrapper;
+
+    editModal.style.display = "block";
+}
+
+function saveEditedInfo(){
+    let ime = $('#izmeniIme').val();
+    let adresa = $('#izmeniAdresu').val();
+    let brojTelefona = $('#izmeniBrojTelefona').val();
+    let opisKvara = $('#izmeniOpisKvara').val();
+    let cena = $('#izmeniCenu').val();
+    let status = $('#izmeniStatus').val().toUpperCase();
+
+    let editedCustomerInfo = new Musterija(ime, adresa,brojTelefona, opisKvara, cena);
+    tempCustomerWrapper.musterija = editedCustomerInfo;
+    tempCustomerWrapper.status = status;
+
+    $.ajax({
+        url: "customer/edit",
+        type: "POST",
+        data: JSON.stringify(tempCustomerWrapper),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response){
+            musterijeTemp = response;
+            drawCustomerBoxes();
+        }
+    })
+
+    editModal.style.display = "none";
+}
+
+function cancelEditModal(){
+    editModal.style.display = "none";
+}
 function drawCustomerBoxes(){
     let testing = document.getElementById("losd");
     testing.innerHTML = "";
@@ -109,6 +155,10 @@ function drawCustomerBoxes(){
         cust.setAttribute('opiskvara', item.musterija.opisKvara);
         cust.setAttribute('adresa', item.musterija.adresa);
         cust.setAttribute('cena', item.musterija.cena);
+        cust.setAttribute('status', item.status);
+        cust.setAttribute('id', item.id);
+        cust.setAttribute('yId', item.yId);
+        cust.setAttribute('date', item.date);
         div.appendChild(cust);
         testing.appendChild(div);
     })
