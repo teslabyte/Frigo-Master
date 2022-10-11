@@ -67,4 +67,15 @@ public class MusterijaDALImpl implements MusterijaDAL {
         mongoTemplate.remove(musterijaWrapper);
         return getAllMusterije();
     }
+
+    @Override
+    public List<MusterijaWrapper> searchCustomers(String query){
+        Query q = new Query();
+        q.addCriteria(new Criteria().orOperator(
+                Criteria.where("musterija.ime").regex(query, "i"),
+                Criteria.where("musterija.adresa").regex(query, "i"),
+                Criteria.where("musterija.brojTelefona").regex(query, "i")
+        ));
+        return mongoTemplate.find(q,MusterijaWrapper.class);
+    }
 }

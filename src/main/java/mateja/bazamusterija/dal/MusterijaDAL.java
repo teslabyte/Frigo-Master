@@ -13,4 +13,5 @@ public interface MusterijaDAL {
     long getNewestMusterijaId();
     List<MusterijaWrapper> editMusterija(MusterijaWrapper musterijaWrapper);
     List<MusterijaWrapper> deleteMusterija(MusterijaWrapper musterijaWrapper);
+    List<MusterijaWrapper> searchCustomers(String query);
 }

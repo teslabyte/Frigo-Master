@@ -3,10 +3,7 @@ package mateja.bazamusterija.controllers;
 import mateja.bazamusterija.Musterija;
 import mateja.bazamusterija.dal.MusterijaDAL;
 import mateja.bazamusterija.MusterijaWrapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +19,11 @@ import java.util.List;
 public class HomeFilterController {
 
     private final MusterijaDAL musterijaDAL;
+
+    @GetMapping(value = "/customers/search")
+    public List<MusterijaWrapper> searchCustomers(@RequestParam("value") String query){
+        return musterijaDAL.searchCustomers(query);
+    }
 
     @PostMapping(value = "/customer/edit", consumes = "application/json")
     public List<MusterijaWrapper> editCustomer(@RequestBody MusterijaWrapper requestBody){

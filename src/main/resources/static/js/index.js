@@ -158,6 +158,14 @@ function deleteCustomerInfo(){
     editModal.style.display = "none";
 }
 
+function search(){
+    let searchCriteria = $("#search-input").val();
+    $.get("customers/search?value=" + searchCriteria, function (data, status) {
+        musterijeTemp = data;
+        drawCustomerBoxes();
+    });
+}
+
 function drawCustomerBoxes(){
     let testing = document.getElementById("losd");
     testing.innerHTML = "";
