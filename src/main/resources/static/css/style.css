@@ -1,11 +1,15 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	background: black;
+}
+
+.main-content{
+	padding: 10px;
+}
 #page-nav {
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.search-bar-div {
-	display: flex;
-	justify-content: center;
 }
 
 .filter-div {
