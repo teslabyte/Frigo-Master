@@ -42,7 +42,7 @@ class CustomerInfoBox extends HTMLElement{
 
         let opisKvaraDiv = document.createElement('div');
         opisKvaraDiv.classList.add("opis-kvara-div");
-        opisKvaraDiv.innerHTML = "  Opis kvara :";// + opisKvara;
+        opisKvaraDiv.innerHTML = "Opis kvara :";// + opisKvara;
 
         let opisDiv = document.createElement('div');
         opisDiv.classList.add("opis-div");
