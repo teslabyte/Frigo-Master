@@ -22,6 +22,20 @@ body{
 	margin-right: auto;
 }
 
+.list-of-customers-div {
+	display: flex;
+	flex-direction: column;
+}
+
+.cust-box-div{
+	display: flex;
+	justify-content: center;
+}
+
+.cust-box {
+	border: 1px solid blue;
+}
+
 #add-customer-button {
 	position: fixed;
 	bottom: 5px;
