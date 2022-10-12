@@ -7,6 +7,7 @@ RS
 
 # TODO  
   - When deleting customer info, dont delete it from the database, only hide it on the site  
-  - Search functionality  
+  - ~~Search functionality~~  
   - input sanitization  
-  - css  
+  - css :  
+    Edit customer modal
