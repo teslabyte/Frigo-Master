@@ -14,21 +14,43 @@ class CustomerInfoBox extends HTMLElement{
         let yId = this.getAttribute('yId') || undefined;
         let date = this.getAttribute('date') || undefined;
 
-        this.innerHTML = 'Ime: ' + ime + '<br/>' +
-            'Opis kvara: ' + opisKvara + '<br/>' +
-            'Adresa: ' + adresa + '<br/>' +
-            'Cena: ' + cena + '<br/>' +
-            'Broj telefona: ' + brojTelefona + '<br/>' +
-            'Status: ' + status + '<br/>';
+        let customerInfoDiv = document.createElement('div')
+        customerInfoDiv.classList.add("customer-info-div");
+        customerInfoDiv.innerHTML = '<class="customerInfo"> Ime: ' + ime  +
+            '<p class="customerInfo"> Adresa: ' + adresa + '</p>' +
+            '<p class="customerInfo"> Broj telefona: ' + brojTelefona + '</p>' +
+            '<p class="customerInfo"> Cena: ' + cena + '</p>';
+
+        this.appendChild(customerInfoDiv);
+
+
         let btn = document.createElement("button");
-        btn.innerHTML = "Izmeni";
+        btn.classList.add("editButton");
+        btn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
         btn.id = "cEditBtn" + id;
         this.appendChild(btn);
+
+        /*$(this).on('mouseover' ,function(event){
+           console.log("TESTING " + id)
+        });*/
+
         $("#cEditBtn" + id).on('click',function(event){
             let newCustomerInfo = new Musterija(ime, adresa, brojTelefona, opisKvara, cena);
             let newCustomerWrapper = new CustomerInfoWrapper(id, newCustomerInfo, yId, date, status);
             editCustomerInfo(newCustomerWrapper);
         });
+
+        let opisKvaraDiv = document.createElement('div');
+        opisKvaraDiv.classList.add("opis-kvara-div");
+        opisKvaraDiv.innerHTML = "Opis kvara :";// + opisKvara;
+
+        let opisDiv = document.createElement('div');
+        opisDiv.classList.add("opis-div");
+        opisDiv.innerHTML = opisKvara;
+
+        opisKvaraDiv.appendChild(opisDiv);
+
+        this.appendChild(opisKvaraDiv);
     }
 
     connectedCallback(){
