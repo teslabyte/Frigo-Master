@@ -1,5 +1,6 @@
 package mateja.bazamusterija.controllers;
 
+import mateja.bazamusterija.DeletedCustomer;
 import mateja.bazamusterija.Musterija;
 import mateja.bazamusterija.dal.DeletedCustomerDAL;
 import mateja.bazamusterija.dal.MusterijaDAL;
@@ -53,16 +54,18 @@ public class HomepageController {
     }
     List<MusterijaWrapper> musterijaWrappers;
 
-    // Filters customer data and returns it
-
-    // Filtrira podatke musterija i salje ih nazad
-
     @GetMapping(value = "/customers/filter")
     public List<MusterijaWrapper> filterCustomers(@RequestParam("value") String filterQuery){
             if(filterQuery.equals("completed")) return musterijaDAL.getAllCompleted();
             else if (filterQuery.equals("incomplete")) return musterijaDAL.getAllIncomplete();
             else if(filterQuery.equals("deleted")) return musterijaDAL.deletedCustomerListToMusterijaWrapperList(deletedCustomerDAL.getAllDeletedCustomers());
             return musterijaDAL.getAllCanceled();
+    }
+
+    @GetMapping(value = "/customers/restore")
+    public void restoreDeletedCustomer(@RequestBody MusterijaWrapper customerToRestore){
+        DeletedCustomer deletedCustomer = new DeletedCustomer(customerToRestore);
+        // TODO
     }
 
     public HomepageController(MusterijaDAL musterijaDAL, DeletedCustomerDAL deletedCustomerDAL){
