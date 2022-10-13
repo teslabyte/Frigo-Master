@@ -1,5 +1,6 @@
 package mateja.bazamusterija.dal;
 
+import mateja.bazamusterija.DeletedCustomer;
 import mateja.bazamusterija.MusterijaWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -77,5 +79,15 @@ public class MusterijaDALImpl implements MusterijaDAL {
                 Criteria.where("musterija.brojTelefona").regex(query, "i")
         ));
         return mongoTemplate.find(q,MusterijaWrapper.class);
+    }
+
+    @Override
+    public List<MusterijaWrapper> deletedCustomerListToMusterijaWrapperList(List<DeletedCustomer> deletedCustomers) {
+        List<MusterijaWrapper> customersList = new ArrayList<>();
+        for(DeletedCustomer del : deletedCustomers){
+            MusterijaWrapper cust = new MusterijaWrapper(del);
+            customersList.add(cust);
+        }
+        return customersList;
     }
 }

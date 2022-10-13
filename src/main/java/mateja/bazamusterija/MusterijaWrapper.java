@@ -30,6 +30,14 @@ public class MusterijaWrapper {
         this.id = id;
     }
 
+    public MusterijaWrapper(DeletedCustomer deletedCustomer){
+        this.musterija = deletedCustomer.getMusterija();
+        this.yId = deletedCustomer.getyId();
+        this.date = deletedCustomer.getDeletedDate();
+        this.status = deletedCustomer.getStatus();
+        this.id = deletedCustomer.getId();
+    }
+
     public Musterija getMusterija() {
         return musterija;
     }

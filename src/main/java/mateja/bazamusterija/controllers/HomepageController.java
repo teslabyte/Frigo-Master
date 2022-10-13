@@ -61,6 +61,7 @@ public class HomepageController {
     public List<MusterijaWrapper> filterCustomers(@RequestParam("value") String filterQuery){
             if(filterQuery.equals("completed")) return musterijaDAL.getAllCompleted();
             else if (filterQuery.equals("incomplete")) return musterijaDAL.getAllIncomplete();
+            else if(filterQuery.equals("deleted")) return musterijaDAL.deletedCustomerListToMusterijaWrapperList(deletedCustomerDAL.getAllDeletedCustomers());
             return musterijaDAL.getAllCanceled();
     }
 

@@ -92,6 +92,13 @@ function filterCancelled(){
     }
 }
 
+function filterDeleted(){
+    $.get("customers/filter?value=deleted", function (data, status) {
+        musterijeTemp = data;
+        drawCustomerBoxes();
+    });
+}
+
 function filterAll(){
     musterijeTemp = musterije;
     drawCustomerBoxes();

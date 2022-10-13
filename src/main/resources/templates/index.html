@@ -39,10 +39,11 @@
 	</div>
 	
 	<div class = "filter-div">
-		<button class = "active-filter-button" th:onclick="filterAll()"> Svi </button>
-		<button class = "filter-button" th:onclick="filterCompleted()"> Zavrseni </button>
-		<button class = "filter-button" th:onclick="filterIncomplete()"> Nezavrseni </button>
-		<button class = "filter-button" th:onclick="filterCancelled()"> Otkazani </button>
+		<button class = "active-filter-button" th:onclick = "filterAll()"> Svi </button>
+		<button class = "filter-button" th:onclick = "filterCompleted()"> Zavrseni </button>
+		<button class = "filter-button" th:onclick = "filterIncomplete()"> Nezavrseni </button>
+		<button class = "filter-button" th:onclick = "filterCancelled()"> Otkazani </button>
+		<button class = "filter-button" th:onclick = "filterDeleted()"> Obrisani </button>
 	</div>
 
 	<script th:inline="javascript">
