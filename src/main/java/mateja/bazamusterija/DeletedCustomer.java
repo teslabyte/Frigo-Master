@@ -20,17 +20,24 @@ public class DeletedCustomer {
 
     private long yId;
 
-    private Status status;
+    private MusterijaWrapper.Status status;
 
     public DeletedCustomer() {
     }
 
-    public DeletedCustomer(long id, Musterija musterija, String deletedDate, long yId, Status status) {
+    public DeletedCustomer(long id, Musterija musterija, String deletedDate, long yId, MusterijaWrapper.Status status) {
         this.id = id;
         this.musterija = musterija;
         this.deletedDate = deletedDate;
         this.yId = yId;
         this.status = status;
+    }
+
+    public DeletedCustomer(MusterijaWrapper deletedCustomer){
+        this.id = deletedCustomer.getId();
+        this.musterija = deletedCustomer.getMusterija();
+        this.yId = deletedCustomer.getyId();
+        this.status = deletedCustomer.getStatus();
     }
 
     public long getId() {
@@ -65,11 +72,11 @@ public class DeletedCustomer {
         this.yId = yId;
     }
 
-    public Status getStatus() {
+    public MusterijaWrapper.Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(MusterijaWrapper.Status status) {
         this.status = status;
     }
 }

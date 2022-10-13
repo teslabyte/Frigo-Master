@@ -1,6 +1,7 @@
 package mateja.bazamusterija.controllers;
 
 import mateja.bazamusterija.Musterija;
+import mateja.bazamusterija.dal.DeletedCustomerDAL;
 import mateja.bazamusterija.dal.MusterijaDAL;
 import mateja.bazamusterija.MusterijaWrapper;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 public class HomepageController {
 
     private final MusterijaDAL musterijaDAL;
+    private final DeletedCustomerDAL deletedCustomerDAL;
 
     @GetMapping(value = "/customers/search")
     public List<MusterijaWrapper> searchCustomers(@RequestParam("value") String query){
@@ -32,6 +34,10 @@ public class HomepageController {
 
     @PostMapping(value = "/customers/delete", consumes = "application/json")
     public List<MusterijaWrapper> deleteCustomer(@RequestBody MusterijaWrapper requestBody){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
+        deletedCustomerDAL.deleteCustomer(requestBody, date);
         return musterijaDAL.deleteMusterija(requestBody);
     }
 
@@ -58,7 +64,8 @@ public class HomepageController {
             return musterijaDAL.getAllCanceled();
     }
 
-    public HomepageController(MusterijaDAL musterijaDAL){
+    public HomepageController(MusterijaDAL musterijaDAL, DeletedCustomerDAL deletedCustomerDAL){
+        this.deletedCustomerDAL = deletedCustomerDAL;
         this.musterijaDAL = musterijaDAL;
     }
 }
