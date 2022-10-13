@@ -11,7 +11,7 @@ import java.util.List;
 //Kontroler za prvo ucitavanje stranice
 
 @Controller
-public class HomeController {
+public class IndexController {
 
     private final MusterijaDAL musterijaDAL;
     List<MusterijaWrapper> musterijaWrappers;
@@ -24,7 +24,7 @@ public class HomeController {
         return "index";
     }
 
-    public HomeController(MusterijaDAL musterijaDAL){
+    public IndexController(MusterijaDAL musterijaDAL){
         this.musterijaDAL = musterijaDAL;
     }
 }

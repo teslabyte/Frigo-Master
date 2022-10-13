@@ -16,7 +16,7 @@ import java.util.List;
 // Verovatno ce biti preimenovana klasa
 
 @RestController
-public class HomeFilterController {
+public class HomepageController {
 
     private final MusterijaDAL musterijaDAL;
 
@@ -25,17 +25,17 @@ public class HomeFilterController {
         return musterijaDAL.searchCustomers(query);
     }
 
-    @PostMapping(value = "/customer/edit", consumes = "application/json")
+    @PostMapping(value = "/customers/edit", consumes = "application/json")
     public List<MusterijaWrapper> editCustomer(@RequestBody MusterijaWrapper requestBody){
         return musterijaDAL.editMusterija(requestBody);
     }
 
-    @PostMapping(value = "/customer/delete", consumes = "application/json")
+    @PostMapping(value = "/customers/delete", consumes = "application/json")
     public List<MusterijaWrapper> deleteCustomer(@RequestBody MusterijaWrapper requestBody){
         return musterijaDAL.deleteMusterija(requestBody);
     }
 
-    @PostMapping(value = "/customer/new", consumes = "application/json")
+    @PostMapping(value = "/customers/new", consumes = "application/json")
     public MusterijaWrapper newCustomer(@RequestBody Musterija requestBody){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -47,32 +47,18 @@ public class HomeFilterController {
     }
     List<MusterijaWrapper> musterijaWrappers;
 
-       /*
-        Try with GetMapping  /filter= {completed,incomplete,cancelled}
-
-        Pokusaj da tri glavna filtera obuhvatis jednim url-om ^
-     */
-
     // Filters customer data and returns it
 
     // Filtrira podatke musterija i salje ih nazad
-    @GetMapping(value = "/completed", produces = "application/json")
-    public List<MusterijaWrapper> homeCompleted(){
 
-        return musterijaDAL.getAllCompleted();
+    @GetMapping(value = "/customers/filter")
+    public List<MusterijaWrapper> filterCustomers(@RequestParam("value") String filterQuery){
+            if(filterQuery.equals("completed")) return musterijaDAL.getAllCompleted();
+            else if (filterQuery.equals("incomplete")) return musterijaDAL.getAllIncomplete();
+            return musterijaDAL.getAllCanceled();
     }
 
-    @GetMapping(value = "/incomplete", produces = "application/json")
-    public List<MusterijaWrapper> homeIncomplete(){
-        return musterijaDAL.getAllIncomplete();
-    }
-
-    @GetMapping(value = "/canceled", produces = "application/json")
-    public List<MusterijaWrapper> homeCancelled(){
-        return musterijaDAL.getAllCanceled();
-    }
-
-    public HomeFilterController( MusterijaDAL musterijaDAL){
+    public HomepageController(MusterijaDAL musterijaDAL){
         this.musterijaDAL = musterijaDAL;
     }
 }

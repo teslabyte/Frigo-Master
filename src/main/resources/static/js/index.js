@@ -36,7 +36,7 @@ function saveCustomerInfo(){
     //send customerInfo to backend
 
     $.ajax({
-        url: "customer/new",
+        url: "customers/new",
         type: "POST",
         data: JSON.stringify(customerInfo),
         contentType: "application/json",
@@ -52,7 +52,7 @@ function saveCustomerInfo(){
 
 function filterCompleted(){
     if(musterijeCompleted === null) {
-        $.get("completed", function (data, status) {
+        $.get("customers/filter?value=completed", function (data, status) {
             musterijeCompleted = data;
             musterijeTemp = musterijeCompleted;
             drawCustomerBoxes();
@@ -66,7 +66,7 @@ function filterCompleted(){
 
 function filterIncomplete(){
     if(musterijeIncomplete === null) {
-        $.get("incomplete", function (data, status) {
+        $.get("customers/filter?value=incomplete", function (data, status) {
             musterijeIncomplete = data;
             musterijeTemp = musterijeIncomplete;
             drawCustomerBoxes();
@@ -80,7 +80,7 @@ function filterIncomplete(){
 
 function filterCancelled(){
     if(musterijeCancelled === null) {
-        $.get("canceled", function (data, status) {
+        $.get("customers/filter?value=canceled", function (data, status) {
             musterijeCancelled = data;
             musterijeTemp = musterijeCancelled;
             drawCustomerBoxes();
@@ -125,7 +125,7 @@ function saveEditedInfo(){
     tempCustomerWrapper.status = status;
 
     $.ajax({
-        url: "customer/edit",
+        url: "customers/edit",
         type: "POST",
         data: JSON.stringify(tempCustomerWrapper),
         contentType: "application/json",
@@ -145,7 +145,7 @@ function cancelEditModal(){
 
 function deleteCustomerInfo(){
     $.ajax({
-        url: "customer/delete",
+        url: "customers/delete",
         type: "POST",
         data: JSON.stringify(tempCustomerWrapper),
         contentType: "application/json",
