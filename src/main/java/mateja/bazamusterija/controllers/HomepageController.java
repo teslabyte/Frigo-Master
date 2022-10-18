@@ -47,12 +47,13 @@ public class HomepageController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
-        long id = musterijaDAL.getNewestMusterijaId() + 1;
+        long id =  Math.max(deletedCustomerDAL.getNewestDeletedId() , musterijaDAL.getNewestMusterijaId());
+        id +=1;
         MusterijaWrapper musterijaWrapper = new MusterijaWrapper(requestBody, id, date, MusterijaWrapper.Status.INCOMPLETE, id);
         musterijaDAL.addNewMusterija(musterijaWrapper);
         return musterijaWrapper;
     }
-    List<MusterijaWrapper> musterijaWrappers;
+
 
     @GetMapping(value = "/customers/filter")
     public List<MusterijaWrapper> filterCustomers(@RequestParam("value") String filterQuery){
@@ -62,10 +63,11 @@ public class HomepageController {
             return musterijaDAL.getAllCanceled();
     }
 
-    @GetMapping(value = "/customers/restore")
-    public void restoreDeletedCustomer(@RequestBody MusterijaWrapper customerToRestore){
+    @PostMapping(value = "/customers/restore")
+    public List<MusterijaWrapper> restoreDeletedCustomer(@RequestBody MusterijaWrapper customerToRestore){
         DeletedCustomer deletedCustomer = new DeletedCustomer(customerToRestore);
-        // TODO
+        musterijaDAL.addNewMusterija(customerToRestore);
+        return musterijaDAL.deletedCustomerListToMusterijaWrapperList(deletedCustomerDAL.removeDeletedCustomer(deletedCustomer));
     }
 
     public HomepageController(MusterijaDAL musterijaDAL, DeletedCustomerDAL deletedCustomerDAL){

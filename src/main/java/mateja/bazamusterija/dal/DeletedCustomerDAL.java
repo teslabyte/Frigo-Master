@@ -9,4 +9,6 @@ public interface DeletedCustomerDAL {
     List<DeletedCustomer> getAllDeletedCustomers();
     DeletedCustomer getDeletedCustomer(long deletedCustomerId);
     void deleteCustomer(MusterijaWrapper customerToDelete, String deletedDate);
+    List<DeletedCustomer> removeDeletedCustomer(DeletedCustomer deletedCustomer);
+    long getNewestDeletedId();
 }
